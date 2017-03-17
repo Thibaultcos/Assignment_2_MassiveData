@@ -76,7 +76,7 @@ public class Preprocessing extends Configured implements Tool{
     @Override
     protected void setup(Context context) throws IOException, InterruptedException {
     	 stopwords = new HashSet<String>();  	 
-    	 String path = "/home/cloudera/workspace/stopwords.csv";   // Change path here if stopword file has been moved
+    	 String path = "/home/cloudera/workspace/code_mdp_assignment2/stopwords.csv";   // Change path here if stopword file has been moved
     	 
 			BufferedReader Reader = new BufferedReader(new FileReader(new File(path)));
 			String line = new String();
@@ -94,9 +94,9 @@ public class Preprocessing extends Configured implements Tool{
  	
     // If the line is not empty, replace punctuation by space.
     if (!value.toString().isEmpty()) {
-    	String line = value.toString().replaceAll("[\\p{Punct}]"," "); // As ask in the homework, we remove all punctuation (even ' or -).
+    	String line = value.toString().replaceAll("[\\p{Punct}]"," "); // As ask in the homework, we remove all punctuation (even ' or -) but we keep upper cases. 
     	for (String token : line.split("\\s+")) {
-    		if (!stopwords.contains(token.toLowerCase()) && !token.isEmpty()) {
+    		if (!stopwords.contains(token.toLowerCase()) && !token.isEmpty()) {  //remove stopwords
     			context.write(new Text("#"+token),new Text("1")); // write # words and 1
         		context.write(new Text(key.toString()),new Text(token));	// write key and id				
     		}

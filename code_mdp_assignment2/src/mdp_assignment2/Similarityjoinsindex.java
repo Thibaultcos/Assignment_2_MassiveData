@@ -95,7 +95,7 @@ public class Similarityjoinsindex extends Configured implements Tool{
 
 		protected void setup(Context context) throws IOException, InterruptedException {
 			
-			String path = "/home/cloudera/workspace/preprocessing.txt";   // Change path here if preprocessed file has been moved
+			String path = "/home/cloudera/workspace/code_mdp_assignment2/preprocessing.txt";   // Change path here if preprocessed file has been moved
 			
 		   	lines = new HashMap<String, String>(); 
 		   	
@@ -170,11 +170,8 @@ public class Similarityjoinsindex extends Configured implements Tool{
 					double similarity = 1.0 * inter / union.size();
 
 					if (similarity >= 0.8) {
-						context.write(new Text("(" + doc1 + ", " + doc2 + ")"), // Add pairs and similarity in the requested format
-								new Text(String.valueOf(similarity)));
-					}	
-					
-					
+						context.write(new Text("(" + doc1 + ", " + doc2 + ")"),new Text(String.valueOf(similarity))); // Add pairs and similarity in the requested format
+					}		
 				}
  
 			}

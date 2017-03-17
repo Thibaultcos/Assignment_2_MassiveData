@@ -79,7 +79,7 @@ public class Similarityjoinspair extends Configured implements Tool{
 		// in the setup, we store the key and line of the preprocessing file in the HashMap. 
 		protected void setup(Context context) throws IOException, InterruptedException {	   	
 		   	prepro = new HashMap<String, String>(); 
-		   	String path = "/home/cloudera/workspace/preprocessing.txt";   // Change path here if preprocessed file has been moved
+		   	String path = "/home/cloudera/workspace/code_mdp_assignment2/preprocessing.txt";   // Change path here if preprocessed file has been moved
 		   	
 					BufferedReader Reader = new BufferedReader(new FileReader(new File(path)));
 					String Stopline;
@@ -122,7 +122,7 @@ public class Similarityjoinspair extends Configured implements Tool{
 		
 		protected void setup(Context context) throws IOException, InterruptedException {  
 		   	prepro = new HashMap<String, String>(); 
-		   	String path = "/home/cloudera/workspace/preprocessing.txt";   // Change path here if preprocessed file has been moved
+		   	String path = "/home/cloudera/workspace/code_mdp_assignment2/preprocessing.txt";   // Change path here if preprocessed file has been moved
 
 					BufferedReader Reader = new BufferedReader(new FileReader(new File(path)));
 					String Stopline;
@@ -169,8 +169,7 @@ public class Similarityjoinspair extends Configured implements Tool{
 			double sim = 1.0 * inter / union.size();
 
 			if (sim >= 0.8) {
-				context.write(new Text("(" + key1 + ", " + key2 + ")"),
-						new Text(String.valueOf(sim)));
+				context.write(new Text("(" + key1 + ", " + key2 + ")"),new Text(String.valueOf(sim))); // write output in the requested format
 			}
 			context.getCounter(CUSTOM_COUNTER.Counter_operations).increment(1); // increment the operation counter
 		}
